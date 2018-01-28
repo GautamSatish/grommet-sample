@@ -57,6 +57,7 @@ export default class TodoAppDashboard extends Component {
     this._onRequestForAddClose = this._onRequestForAddClose.bind(this);
     this._onRequestForDelete = this._onRequestForDelete.bind(this);
     this._onAddTask = this._onAddTask.bind(this);
+    this._onMeterActive = this._onMeterActive(this);
 
     this.state = {
       tasks: [],
