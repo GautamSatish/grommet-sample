@@ -69,15 +69,16 @@ export default class TodoAppDashboard extends Component {
   }
 
 /* This function is invoked when the component is mounted.
-     Invoke the get all tasks routine  here.
+     Invoke the get all tasks routine  here. */
   componentDidMount() {
     this._getTasks(this.props.user);
-  } */
+  }
 
   /* This function is invoked everytime the component receives new props.
-     Invoke the get all tasks routine  to reflect user updates in the textInput.
+     Invoke the get all tasks routine  to reflect user updates in the textInput. */
   componentWillReceiveProps(nextProps) {
-  } */
+    this._getTasks(nextProps.user);
+  }
 
   /* REST API invocations */
   _getTasks(user) {
@@ -118,12 +119,14 @@ export default class TodoAppDashboard extends Component {
     const { tasks } = this.state;
     const index = this.state.tasks.indexOf(task);
     tasks.splice(index, 1);
+    this._delTask(task.index);
     this.setState({ tasks });
   }
 
   _onAddTask(task) {
     const tasks = this.state.tasks;
     tasks.push(task);
+    this._addTask(task);
     this.setState({ tasks, addTask: false });
   }
 
