@@ -15,6 +15,9 @@ import Value from 'grommet/components/Value';
 import Status from 'grommet/components/icons/Status';
 import CloseIcon from 'grommet/components/icons/base/Close';
 
+import processStatus from 'grommet/utils/Rest';
+import fetch from 'isomorphic-fetch';
+
 import TodoAddTaskForm from './TodoAddTaskForm';
 
 function getLabel(label, value, colorIndex) {
@@ -63,6 +66,44 @@ export default class TodoAppDashboard extends Component {
       tasks: [],
       addTask: false
     };
+  }
+
+/* This function is invoked when the component is mounted.
+     Invoke the get all tasks routine  here.
+  componentDidMount() {
+    this._getTasks(this.props.user);
+  } */
+
+  /* This function is invoked everytime the component receives new props.
+     Invoke the get all tasks routine  to reflect user updates in the textInput.
+  componentWillReceiveProps(nextProps) {
+  } */
+
+  /* REST API invocations */
+  _getTasks(user) {
+    const options = { method: 'GET' };
+    fetch(`https://todo-list-mit.herokuapp.com/api/tasks?user=${user}`, options)
+    .then(processStatus)
+    .then(response => response.json())
+    .then(result => this.setState({ tasks: result }));
+  }
+
+  _addTask(task) {
+    task.user = this.props.user;
+
+    const options = { method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(task)
+    };
+    fetch('https://todo-list-mit.herokuapp.com/api/tasks', options);
+  }
+
+  _delTask(index) {
+    const options = { method: 'DELETE' };
+    fetch(`https://todo-list-mit.herokuapp.com/api/tasks/${index}`, options);
   }
 
   _onRequestForAdd() {
