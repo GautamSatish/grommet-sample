@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import Accordion from 'grommet/components/Accordion';
+import AccordionPanel from 'grommet/components/AccordionPanel';
 import App from 'grommet/components/App';
 import Box from 'grommet/components/Box';
 import Anchor from 'grommet/components/Anchor';
 import Header from 'grommet/components/Header';
 import Footer from 'grommet/components/Footer';
+import Form from 'grommet/components/Form';
+import FormField from 'grommet/components/FormField';
 import Title from 'grommet/components/Title';
+import TextInput from 'grommet/components/TextInput';
 import TodoAppDashboard from './components/TodoAppDashboard';
 
 export default class SampleApp extends Component {
@@ -20,11 +25,9 @@ export default class SampleApp extends Component {
     };
   }
 
-  /*
-  _onChangeUser() {
-    Use event.target.value
+  _onChangeUser(event) {
+    this.setState({ user: event.target.value });
   }
-  */
 
   render() {
     return (
@@ -33,8 +36,18 @@ export default class SampleApp extends Component {
           <Header direction='row' justify='between'
             pad={{ horizontal: 'medium' }}>
             <Title>Todo App</Title>
+            <Accordion>
+              <AccordionPanel heading={this.state.user}>
+                <Box>
+                  <Form>
+                    <FormField label='Enter new User'>
+                      <TextInput id='newUser' onDOMChange={this._onChangeUser} />
+                    </FormField>
+                  </Form>
+                </Box>
+              </AccordionPanel>
+            </Accordion>
           </Header>
-          {/* Add your component here. */}
           <TodoAppDashboard user={this.state.user} />
           <Footer primary={true} appCentered={true} direction='column'
             align='center' pad='small' colorIndex='grey-1'>
