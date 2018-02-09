@@ -71,7 +71,6 @@ export default class TodoAppDashboard extends Component {
 /* This function is invoked when the component is mounted.
      Invoke the get all tasks routine  here.
   componentDidMount() {
-    this._getTasks(this.props.user);
   } */
 
   /* This function is invoked everytime the component receives new props.
