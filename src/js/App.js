@@ -8,6 +8,24 @@ import Title from 'grommet/components/Title';
 import TodoAppDashboard from './components/TodoAppDashboard';
 
 export default class SampleApp extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this._onChangeUser = this._onChangeUser.bind(this);
+    this.render = this.render.bind(this);
+
+    this.state = {
+      user: 'gautam'
+    };
+  }
+
+  /*
+  _onChangeUser() {
+    Use event.target.value
+  }
+  */
+
   render() {
     return (
       <App centered={false}>
@@ -16,7 +34,8 @@ export default class SampleApp extends Component {
             pad={{ horizontal: 'medium' }}>
             <Title>Todo App</Title>
           </Header>
-          <TodoAppDashboard />
+          {/* Add your component here. */}
+          <TodoAppDashboard user={this.state.user} />
           <Footer primary={true} appCentered={true} direction='column'
             align='center' pad='small' colorIndex='grey-1'>
             <p>

@@ -169,3 +169,7 @@ export default class TodoAppDashboard extends Component {
     );
   }
 }
+
+TodoAppDashboard.propTypes = {
+  user: PropTypes.string.isRequired
+};
